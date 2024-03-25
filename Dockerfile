@@ -32,6 +32,8 @@ RUN cd /tmp && \
     rm -rf /tmp/ninja
 
 RUN chsh -s /bin/bash
+COPY ./change-clang-version.sh /tmp
+RUN cd /tmp && ./change-clang-version.sh 18
 
 # Dev container stage
 FROM build-env as devcontainer
