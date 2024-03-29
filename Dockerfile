@@ -11,8 +11,11 @@ RUN apt-get update && \
     g++ make \
     pkg-config valgrind doxygen graphviz cppcheck \
     protobuf-compiler libprotobuf-dev libpqxx-dev \
-    clang-18 clang-tools-18 clang-format-18 clang-tidy-18 \
+    clang-18 clang-tools-18 clang-format-18 clang-tidy-18 libclang-rt-18-dev\
     && rm -rf /var/lib/apt/lists/*
+
+COPY ./change-clang-version.sh /tmp
+RUN cd /tmp && ./change-clang-version.sh 18
 
 ENV version=3.28.0
 RUN cd /tmp && \
@@ -32,8 +35,6 @@ RUN cd /tmp && \
     rm -rf /tmp/ninja
 
 RUN chsh -s /bin/bash
-COPY ./change-clang-version.sh /tmp
-RUN cd /tmp && ./change-clang-version.sh 18
 
 # Dev container stage
 FROM build-env as devcontainer
