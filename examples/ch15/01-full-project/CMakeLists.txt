@@ -8,3 +8,5 @@ include(CTest)
 
 add_subdirectory(src bin)
 add_subdirectory(test)
+
+include(Packaging)

@@ -30,3 +30,10 @@ Doxygen(calc_console src/calc_console)
 
 add_executable(calc_console bootstrap.cpp)
 target_link_libraries(calc_console calc_console_static)
+
+# Installation
+
+include(GNUInstallDirs)
+install(TARGETS calc_console
+  RUNTIME COMPONENT runtime
+)

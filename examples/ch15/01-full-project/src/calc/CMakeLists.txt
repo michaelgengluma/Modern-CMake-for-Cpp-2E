@@ -25,3 +25,30 @@ AddCppCheck(calc_obj)
 
 include(Doxygen)
 Doxygen(calc src/calc)
+
+# Installation
+
+include(GNUInstallDirs)
+
+install(TARGETS calc_obj calc_shared calc_static
+  EXPORT CalcLibrary
+  ARCHIVE COMPONENT development
+  LIBRARY COMPONENT runtime
+  FILE_SET HEADERS COMPONENT runtime
+)
+
+if (UNIX)
+  install(CODE "execute_process(COMMAND ldconfig)"
+          COMPONENT runtime
+  )
+endif()
+
+install(EXPORT CalcLibrary
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/calc/cmake
+  NAMESPACE Calc::
+  COMPONENT runtime
+)
+
+install(FILES "CalcConfig.cmake"
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/calc/cmake
+)
