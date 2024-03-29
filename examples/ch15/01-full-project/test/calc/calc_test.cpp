@@ -1,11 +1,11 @@
-#include "calc/calc.h"
+#include "calc/basic.h"
 
 #include <gtest/gtest.h>
 
 TEST(CalcTest, SumAddsTwoInts) {
-  EXPECT_EQ(4, Calc::Sum(2, 2));
+  EXPECT_EQ(4, Add(2, 2));
 }
 
-TEST(CalcTest, MultiplyMultipliesTwoInts) {
-  EXPECT_EQ(12, Calc::Multiply(3, 4));
+TEST(CalcTest, SubtractsTwoInts) {
+  EXPECT_EQ(6, Subtract(8, 2));
 }

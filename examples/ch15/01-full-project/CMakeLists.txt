@@ -4,9 +4,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 include(NoInSourceBuilds)
 
-enable_testing()
+include(CTest)
 
 add_subdirectory(src bin)
 add_subdirectory(test)
-
-include(Install)

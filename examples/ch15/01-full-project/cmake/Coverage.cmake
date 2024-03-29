@@ -1,4 +1,4 @@
-function(EnableCoverage target)
+function(InstrumentForCoverage target)
   if (CMAKE_BUILD_TYPE STREQUAL Debug)
     target_compile_options(${target} PRIVATE --coverage
                                              -fno-inline)
@@ -9,7 +9,7 @@ endfunction()
 function(CleanCoverage target)
   add_custom_command(TARGET ${target} PRE_BUILD COMMAND
                      find ${CMAKE_BINARY_DIR} -type f
-                     -name '*.gcda' -exec rm {} +)
+                     -name '*.gcda' -exec cmake -E rm {} +)
 endfunction()
 
 function(AddCoverage target)
