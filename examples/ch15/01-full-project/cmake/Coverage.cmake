@@ -1,17 +1,3 @@
-function(InstrumentForCoverage target)
-  if (CMAKE_BUILD_TYPE STREQUAL Debug)
-    target_compile_options(${target} PRIVATE --coverage
-                                             -fno-inline)
-    target_link_options(${target} PUBLIC --coverage)
-  endif()
-endfunction()
-
-function(CleanCoverage target)
-  add_custom_command(TARGET ${target} PRE_BUILD COMMAND
-                     find ${CMAKE_BINARY_DIR} -type f
-                     -name '*.gcda' -exec cmake -E rm {} +)
-endfunction()
-
 function(AddCoverage target)
   find_program(LCOV_PATH lcov REQUIRED)
   find_program(GENHTML_PATH genhtml REQUIRED)
@@ -26,4 +12,18 @@ function(AddCoverage target)
     COMMAND rm -rf coverage.info filtered.info
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
+endfunction()
+
+function(CleanCoverage target)
+  add_custom_command(TARGET ${target} PRE_BUILD COMMAND
+                     find ${CMAKE_BINARY_DIR} -type f
+                     -name '*.gcda' -exec cmake -E rm {} +)
+endfunction()
+
+function(InstrumentForCoverage target)
+  if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    target_compile_options(${target} 
+                           PRIVATE --coverage -fno-inline)
+    target_link_options(${target} PUBLIC --coverage)
+  endif()
 endfunction()

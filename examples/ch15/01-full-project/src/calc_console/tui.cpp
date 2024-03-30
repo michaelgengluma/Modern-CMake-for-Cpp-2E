@@ -15,7 +15,7 @@ auto component = Container::Vertical({input_a, input_b});
 
 Component getTui() {
   return Renderer(component, [&] {
-    auto sum = Add(stoi(a), stoi(b));
+    auto sum = Calc::Add(stoi(a), stoi(b));
     return vbox({
                text("CalcConsole " + BuildInfo::Version),
                text("Built: " + BuildInfo::Timestamp),
