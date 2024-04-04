@@ -74,4 +74,6 @@ if (PQXX_FOUND)
     "${PQXX_LIBRARY_PATH};${POSTGRES_LIBRARIES}"
     "${PQXX_HEADER_PATH};${POSTGRES_INCLUDE_DIRECTORIES}"
   )
+elseif(PQXX_FIND_REQUIRED)
+  message(FATAL_ERROR "Required PQXX library not found")
 endif()
