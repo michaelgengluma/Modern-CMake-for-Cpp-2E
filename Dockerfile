@@ -50,3 +50,4 @@ CMD ["/usr/sbin/sshd", "-D"]
 FROM devcontainer as examples
 COPY . /devuser
 WORKDIR /devuser/examples
+CMD ["/bin/bash"]
